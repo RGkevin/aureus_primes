@@ -11,10 +11,3 @@ def fibonacci_range(end):
 
     return res
 
-
-def fibonacci_sums(fib_nums):
-    res = []
-    for idx, x in enumerate(xs):
-        print(idx, x)
-
-    return fib
