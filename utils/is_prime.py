@@ -2,11 +2,8 @@ def is_prime(n: int) -> bool:
     """A Python program to check if a given number n is prime,
     using the (6k+-1) rule."""
 
-    if type(n) != int:
-        raise TypeError('n must be int')
-
     if n <= 1:
-        raise ValueError('n must be >= 2')
+        return False
 
     if n in (2, 3, 5):
         return True
