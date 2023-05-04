@@ -1,3 +1,6 @@
+from utils.last_digit import last_digit
+
+
 def is_prime(n: int) -> bool:
     """A Python program to check if a given number n is prime,
     using the (6k+-1) rule."""
@@ -7,6 +10,11 @@ def is_prime(n: int) -> bool:
 
     if n in (2, 3, 5):
         return True
+
+    # n_last_digit = last_digit(n)
+    # if n_last_digit not in (1, 3, 7, 9):
+    #     print('last_digit IS NOT A PRIME CANDIDATE', n, n_last_digit)
+    #     return False
 
     if n % 6 not in (1, 5):
         return False
