@@ -8,4 +8,4 @@ def list_ranges(nums):
 
 
 def list_range_reducer(prev, current):
-    return [[prev, current]] if not isinstance(prev, list) else prev + [[prev[-1][-1], current]]
+    return [[prev + 1, current]] if not isinstance(prev, list) else prev + [[prev[-1][-1] + 1, current]]

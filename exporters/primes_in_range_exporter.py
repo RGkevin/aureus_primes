@@ -1,10 +1,11 @@
 import csv
 
 
-def primes_in_range_exporter(file_path, fibonacci_nums, primes_in_range):
+def primes_in_range_exporter(start, file_path, fibonacci_nums, primes_in_range):
     header = [
-        'index', 'f_num', 'f_sum', 'range_start', 'range_end', 'n_nums_in_range', 'primes_in_range', 'index', 'n.len / p.len']
-    data = [[0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        'index', 'f_num', 'f_sum', 'range_start', 'range_end', 'n_nums_in_range', 'primes_in_range', 'index',
+        'n.len / p.len', 'f_dim_i', 'increment']
+    data = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
     for idx, p_range in enumerate(primes_in_range):
         index = idx + 1
@@ -14,7 +15,12 @@ def primes_in_range_exporter(file_path, fibonacci_nums, primes_in_range):
         p_in_range = p_range[-1]
         np_division = (n_nums_in_range / p_in_range) if p_in_range != 0 else 0
         f_sum_range = p_range[2]
-        data += [[index, f_num, f_sum, f_sum_range[0], f_sum_range[-1], n_nums_in_range, p_in_range, index, np_division]]
+        display_index = index + start
+        increment = np_division - (data[index - 1][8] if index > 1 else np_division)
+
+        data += [
+            [display_index, f_num, f_sum, f_sum_range[0], f_sum_range[-1], n_nums_in_range, p_in_range, display_index,
+             np_division, display_index, increment]]
 
     with open(file_path, 'w') as f:
         writer = csv.writer(f)
