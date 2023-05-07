@@ -10,20 +10,15 @@ from utils.fibonacci_range_round import fibonacci_range_round
 from utils.list_ranges import list_ranges
 
 record = 43
-f_dimension_start = 20
-f_dimension_end = 24
+f_dimension_start = 25
+f_dimension_end = 30
 now = datetime.now()
 date_time = now.strftime("%m%d%Y%H%M%S")
 #  TODO takes too long to calculate fibonacci, replace calculation with fetch from source
 
 
-# fib_nums = fibonacci_gen(f_dimension_end + 1)
-# fibonacci_nums = fibonacci_range(f_dimension_start, f_dimension_end, fib_nums)
 fibonacci_nums = fibonacci_range_round(f_dimension_start, f_dimension_end)
 fibonacci_sums = sums_range(f_dimension_start, f_dimension_end, fibonacci_nums)
-
-# print(fibonacci_sums)
-# raise Exception(fibonacci_sums)
 
 fibonacci_sums_ranges = list_ranges(fibonacci_sums)
 

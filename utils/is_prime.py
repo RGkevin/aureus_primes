@@ -1,3 +1,5 @@
+from math import sqrt
+
 from utils.last_digit import last_digit
 
 
@@ -19,8 +21,12 @@ def is_prime(n: int) -> bool:
     if n % 6 not in (1, 5):
         return False
 
-    for f in range(5, int(n ** 1 / 2) + 1, 6):
-        if not n % f or not n % (f + 2):
+    # for f in range(5, int(n ** 1 / 2) + 1, 6):
+    #     if not n % f or not n % (f + 2):
+    #         return False
+
+    for x in range(3, int(sqrt(n)) + 1, 2):
+        if n % x == 0:
             return False
 
     return True
