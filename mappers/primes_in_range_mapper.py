@@ -6,7 +6,6 @@ from utils.prime_counter_range import prime_counter_range
 def primes_in_range_mapper(num_range):
     start = num_range[0]
     end = num_range[1]
-    # primes_in_range = list(sympy.primerange(start, end))
     p_in_range = prime_counter_range([start, end])
 
     print('primes_in_range_mapper num_range {} primes: {}'

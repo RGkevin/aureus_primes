@@ -15,8 +15,8 @@ def fibonacci_gen(end):
 
 
 def fibonacci_range(start_dim, end_dim, fib_nums) -> List[int]:
-    if start_dim > end_dim:
+    if start_dim > end_dim or start_dim == end_dim:
         raise Exception('Start {} dimension should be less than End {}'.format(start_dim, end_dim))
 
     # fib_nums = fibonacci_gen(end_dim + 1)
-    return [fib_nums[-1]] if start_dim == end_dim else fib_nums[start_dim:end_dim + 1]
+    return [fib_nums[len(fib_nums) - 1]] if start_dim == end_dim else fib_nums[start_dim:end_dim + 1]

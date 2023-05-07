@@ -6,17 +6,24 @@ from exporters.primes_in_range_exporter import primes_in_range_exporter
 from generators.fibonacci import fibonacci_range, fibonacci_gen
 from generators.summatory import sums_range
 from mappers.primes_in_range_mapper import primes_in_range_mapper
+from utils.fibonacci_range_round import fibonacci_range_round
 from utils.list_ranges import list_ranges
 
-f_dimension_start = 15
-f_dimension_end = 20
+record = 43
+f_dimension_start = 20
+f_dimension_end = 24
 now = datetime.now()
 date_time = now.strftime("%m%d%Y%H%M%S")
+#  TODO takes too long to calculate fibonacci, replace calculation with fetch from source
 
-fib_nums = fibonacci_gen(f_dimension_end + 1)
-fibonacci_nums = fibonacci_range(f_dimension_start, f_dimension_end, fib_nums)
 
-fibonacci_sums = sums_range(f_dimension_start, f_dimension_end, fib_nums)
+# fib_nums = fibonacci_gen(f_dimension_end + 1)
+# fibonacci_nums = fibonacci_range(f_dimension_start, f_dimension_end, fib_nums)
+fibonacci_nums = fibonacci_range_round(f_dimension_start, f_dimension_end)
+fibonacci_sums = sums_range(f_dimension_start, f_dimension_end, fibonacci_nums)
+
+# print(fibonacci_sums)
+# raise Exception(fibonacci_sums)
 
 fibonacci_sums_ranges = list_ranges(fibonacci_sums)
 

@@ -16,5 +16,4 @@ def prime_counter_range(real_range: List[int]) -> int:
 
     print('prime_counter_range.real_range {} filtered_gen_range {}'.format(real_range, len(filtered_gen_range)))
 
-    # return 0
     return sum(1 for i in filtered_gen_range if is_prime(i))
