@@ -11,7 +11,3 @@ def binets_formula(n):
     The central function implementing Binet's Formula
     """
     return fibonacci_nums[n + 1]
-
-    # f_n = int((((1 + sqrt5) ** n - (1 - sqrt5) ** n) / (2 ** n * sqrt5)))
-
-    # return f_n

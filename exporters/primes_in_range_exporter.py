@@ -7,8 +7,8 @@ def primes_in_range_exporter(start, file_path, fibonacci_nums, primes_in_range):
         'n.len / p.len', 'f_dim_i', 'increment']
     data = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-    for idx, p_range in enumerate(primes_in_range):
-        index = idx + 1
+    for p_range in primes_in_range:
+        index = 0
         f_num = fibonacci_nums[index]
         f_sum = p_range[0]
         n_nums_in_range = p_range[1]

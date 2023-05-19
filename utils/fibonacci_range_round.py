@@ -4,7 +4,6 @@ from utils.binets_formula import binets_formula
 
 
 def fibonacci_range_round(begin: int, finish: int) -> List[int]:
-    # TODO dont calculate fibonacci, instead get them from source
     fib_nums = []
     # inclusive range
     diff = finish - begin + 1
