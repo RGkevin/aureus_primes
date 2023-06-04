@@ -6,8 +6,5 @@ from resources.fibonacci_nums import fibonacci_nums
 sqrt5 = math.sqrt(5)
 
 
-def binets_formula(n):
-    """
-    The central function implementing Binet's Formula
-    """
-    return fibonacci_nums[n + 1]
+def binets_formula(idx):
+    return fibonacci_nums[idx]

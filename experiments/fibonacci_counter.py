@@ -1,38 +1,39 @@
-import os.path
+import logging
+import os
+import sys
 from datetime import datetime
 
 from definitions import ROOT_DIR
-from exporters.primes_in_range_exporter import primes_in_range_exporter
-from generators.fibonacci import fibonacci_range, fibonacci_gen
+from generators.prime_range_generator import positional_primes_generator
 from generators.summatory import sums_range
-from mappers.primes_in_range_mapper import primes_in_range_mapper
+from utils.end_experiment import end_experiment
 from utils.fibonacci_range_round import fibonacci_range_round
-from utils.list_ranges import list_ranges
+from utils.logger_parser import logger_parser
+from utils.logging_setup import logging_setup
 from utils.prime_range_generator import prime_range_generator
 
-f_dimension_start = 42
-f_dimension_end = 43
+logging_setup()
+
+dimension_start_idx = 5
+dimension_end_idx = 10
 now = datetime.now()
 
-date_time = now.strftime("%m%d%Y%H%M%S")
-# fibonacci_nums = fibonacci_range_round(f_dimension_start, f_dimension_end)
+fibonacci_nums = fibonacci_range_round(dimension_start_idx, dimension_end_idx)
+logger_parser('SETUP.EXPERIMENT.fibonacci_counter', 'Dimension start {}({}) end {}({}) \n {}', [
+    dimension_start_idx,
+    fibonacci_nums[0],
+    dimension_end_idx,
+    fibonacci_nums[-1],
+    fibonacci_nums,
+])
 
-# print('Fibonacci dimension start {}, end {}'.format(f_dimension_start, f_dimension_end))
-# print('Fibonacci nums {}'.format(fibonacci_nums))
-# fibonacci_sums = sums_range(f_dimension_start, f_dimension_end, fibonacci_nums)
+fibonacci_sums = sums_range(dimension_start_idx, dimension_end_idx, fibonacci_nums)
+logger_parser('SETUP.EXPERIMENT.fibonacci_counter', 'fibonacci_sums calculated \n {}', [fibonacci_sums])
 
-# fibonacci_sums_ranges = list_ranges(fibonacci_sums)
+upto = fibonacci_sums[-1]
+positional_primes = positional_primes_generator(upto)
+primes_upto = positional_primes.sum() + 1
 
-# print(fibonacci_sums_ranges[-1])
+logger_parser('IN_PROGRESS.EXPERIMENT.fibonacci_counter', 'primes_upto {} is {}', [upto, primes_upto])
 
-# primes_below = prime_range_generator(fibonacci_sums_ranges[-1][0])
-# primes_upto = prime_range_generator(fibonacci_sums_ranges[-1][-1])
-upto = 32951280098
-print('START COUNTER UPTO {}'.format(upto))
-primes_upto = prime_range_generator(upto)
-
-print('PRIMES upto {} is {}'.format(upto, len(primes_upto)))
-
-later_time = datetime.now()
-delta_time = (later_time - now).total_seconds()
-print('END took {} seconds'.format(delta_time))
+end_experiment(now, 'fibonacci_counter')
