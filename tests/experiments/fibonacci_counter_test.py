@@ -19,13 +19,11 @@ from utils.logging_setup import logging_setup
 from utils.possible_primes import possible_primes
 from utils.prime_range_generator import prime_range_generator
 
-now = datetime.now()
 logging_setup()
 
-dimension_start_idx = 40
-dimension_end_idx = 42
-# took 61s
-# TODO improve memory storage management
+dimension_start_idx = 0
+dimension_end_idx = 20
+now = datetime.now()
 
 fibonacci_nums = fibonacci_range_round(dimension_start_idx, dimension_end_idx)
 logger_parser('SETUP.EXPERIMENT.fibonacci_counter', 'Dimension start {}({}) end {}({}) \n {}', [
@@ -60,6 +58,7 @@ logger_parser('IN_PROGRESS.EXPERIMENT.fibonacci_counter', 'start_possible_prime 
 
 
 def sum_primes_in_range(start_idx, end):
+    # start_idx = possible_primes_calculated
     total = 0
     latest_idx = start_idx
     latest_odd_num = possible_primes_calculated[start_idx]
@@ -71,13 +70,16 @@ def sum_primes_in_range(start_idx, end):
         latest_idx += 1
         latest_odd_num += 2
 
-    return [start_idx, latest_idx, total]
+    res = [start_idx, latest_idx, total]
+    logger_parser('IN_PROGRESS.EXPERIMENT.fibonacci_counter', 'sum_primes_in_range result {}', [res])
+
+    return res
 
 
 def fib_ranges_sum_reducer(prev, current):
     start = prev if not isinstance(prev, list) else prev[-1][1]
     end = current
-    start_idx = where(possible_primes_calculated == start_possible_prime)[0][0]\
+    start_idx = where(possible_primes_calculated == start_possible_prime)[0][0] \
         if not isinstance(prev, list) else prev[-1][-1][1]
     primes_in_range = sum_primes_in_range(start_idx, end)
     res = [start, end, primes_in_range]
@@ -90,11 +92,21 @@ def fib_ranges_sum_reducer(prev, current):
 
 fib_range_primes_sum = reduce(fib_ranges_sum_reducer, sums_to_reduce)
 main_result = fib_range_primes_sum
-
-# fix data if necessary
 if dimension_start_idx <= 1:
     main_result = [[2, 4, [0, 0, 1]]] + main_result
     if dimension_start_idx < 1:
         main_result = [[1, 2, [0, 0, 1]]] + main_result
 
+logger_parser('END.EXPERIMENT.fibonacci_counter', 'main_result \n{}', [main_result])
+
+
+# if you want to sum all primes up to
+primes_upto = positional_counter_primes.sum() + 1
+logger_parser('IN_PROGRESS.EXPERIMENT.fibonacci_counter', 'primes_upto {} is {}', [upto, primes_upto])
+
+fib_total_sum = 0
+for sub_total in main_result:
+    fib_total_sum += sub_total[-1][-1]
+
+print('fib_total_sum', fib_total_sum, primes_upto)
 end_experiment(now, 'fibonacci_counter')
